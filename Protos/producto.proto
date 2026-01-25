@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option csharp_namespace = "PoliMarket.gRPC";
+
+package producto;
+
+service ProductoService {
+  rpc GetProductos (Empty) returns (ProductoListResponse);
+  rpc GetProductoById (GetProductoByIdRequest) returns (ProductoResponse);
+  rpc CreateProducto (CreateProductoRequest) returns (ProductoResponse);
+  rpc UpdateProducto (UpdateProductoRequest) returns (ProductoResponse);
+  rpc DeleteProducto (DeleteProductoRequest) returns (DeleteProductoResponse);
+}
+
+message Empty {
+}
+
+message ProductoMessage {
+  string id = 1;
+  string nombre = 2;
+  string descripcion = 3;
+  double precio = 4;
+}
+
+message ProductoListResponse {
+  repeated ProductoMessage productos = 1;
+}
+
+message ProductoResponse {
+  ProductoMessage producto = 1;
+}
+
+message GetProductoByIdRequest {
+  string id = 1;
+}
+
+message CreateProductoRequest {
+  string nombre = 1;
+  string descripcion = 2;
+  double precio = 3;
+}
+
+message UpdateProductoRequest {
+  string id = 1;
+  optional string nombre = 2;
+  optional string descripcion = 3;
+  optional double precio = 4;
+}
+
+message DeleteProductoRequest {
+  string id = 1;
+}
+
+message DeleteProductoResponse {
+  bool success = 1;
+}
+
